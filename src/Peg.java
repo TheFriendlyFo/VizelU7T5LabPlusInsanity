@@ -1,11 +1,9 @@
 public class Peg {
     // true represents blue, false represents red
     private final boolean color;
-    private final int id;
 
-    Peg(boolean color, int id) {
+    Peg(boolean color) {
         this.color = color;
-        this.id = id;
     }
 
     public String toString() {

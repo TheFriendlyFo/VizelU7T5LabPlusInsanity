@@ -5,12 +5,13 @@ public class Insanity {
     private final Peg[] pegs;
 
     Insanity() {
+        moves = 0;
         pegs = new Peg[10];
         for (int i = 0; i < 4; i++) {
-            pegs[i] = new Peg(true, i);
+            pegs[i] = new Peg(true);
         }
         for (int i = 6; i < 10; i++) {
-            pegs[i] = new Peg(false, i);
+            pegs[i] = new Peg(false);
         }
     }
 
@@ -26,13 +27,19 @@ public class Insanity {
                 System.out.print("> ");
                 validMove = movePeg(scanner.nextInt() - 1);
             }
+            moves++;
             displayBoard();
             won = evaluateBoard();
         }
+
+        System.out.println("You've beaten the game! Nice job!");
     }
 
     public void displayBoard() {
-        System.out.println("+---+ ".repeat(pegs.length));
+        System.out.println("\n}-------------------------{\n");
+        System.out.println("Moves taken: " + moves);
+
+        System.out.println("\n" + "+---+ ".repeat(pegs.length));
         for (Peg peg: pegs) {
             System.out.print("| " + (peg == null ? " " : peg) + " | ");
         }
@@ -43,7 +50,7 @@ public class Insanity {
             System.out.print(" |" + i + "|  ");
         }
 
-        System.out.println();
+        System.out.println("\n");
     }
 
     public boolean movePeg(int pegIdx) {
