@@ -58,17 +58,13 @@ public class Insanity {
 
         Peg peg = pegs[pegIdx];
         for (int i = pegIdx; Math.abs(i - pegIdx) < 3; i += peg.direction()) {
-            if (isValidMove(i)) {
+            if ((0 <= i && i < pegs.length) && (pegs[i] == null)) {
                 pegs[pegIdx] = null;
                 pegs[i] = peg;
                 return true;
             }
         }
         return false;
-    }
-
-    private boolean isValidMove(int idx) {
-        return (0 <= idx && idx < pegs.length) && (pegs[idx] == null);
     }
 
     private boolean evaluateBoard() {
