@@ -36,14 +36,21 @@ public class Insanity {
         for (Peg peg: pegs) {
             System.out.print("| " + (peg == null ? " " : peg) + " | ");
         }
+
         System.out.println("\n" + "+---+ ".repeat(pegs.length));
+
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(" |" + i + "|  ");
+        }
+
+        System.out.println();
     }
 
     public boolean movePeg(int pegIdx) {
         if (pegIdx < 0 || pegs.length <= pegIdx || pegs[pegIdx] == null) return false;
 
         Peg peg = pegs[pegIdx];
-        for (int i = pegIdx + 1; Math.abs(i - pegIdx) < 3; i += peg.direction()) {
+        for (int i = pegIdx; Math.abs(i - pegIdx) < 3; i += peg.direction()) {
             if (isValidMove(i)) {
                 pegs[pegIdx] = null;
                 pegs[i] = peg;
@@ -59,10 +66,10 @@ public class Insanity {
 
     private boolean evaluateBoard() {
         for (int i = 0; i < 4; i++) {
-            if (pegs[i].getColor()) return false;
+            if (pegs[i] == null || pegs[i].getColor()) return false;
         }
         for (int i = 6; i < 10; i++) {
-            if (!pegs[i].getColor()) return false;
+            if (pegs[i] == null || !pegs[i].getColor()) return false;
         }
         return true;
     }
