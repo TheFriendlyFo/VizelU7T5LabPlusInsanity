@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Insanity {
     private int moves;
     private final Peg[] pegs;
@@ -9,6 +11,23 @@ public class Insanity {
         }
         for (int i = 6; i < 10; i++) {
             pegs[i] = new Peg(false, i);
+        }
+    }
+
+    public void play() {
+        boolean won = false;
+        Scanner scanner = new Scanner(System.in);
+
+        displayBoard();
+        while (!won) {
+            boolean validMove = false;
+            while (!validMove) {
+                System.out.println("Select a peg to move:");
+                System.out.print("> ");
+                validMove = movePeg(scanner.nextInt() - 1);
+            }
+            displayBoard();
+            won = evaluateBoard();
         }
     }
 
